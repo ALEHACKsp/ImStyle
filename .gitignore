@@ -1,7 +1,7 @@
 .vs
 bin
 libs
-*.sdf
+*sdf
 *.vcx*
 *.sln
 

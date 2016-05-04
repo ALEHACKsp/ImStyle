@@ -8,11 +8,19 @@
 void ShowTestWindow();
 void ShowStyleEditor();
 
+sf::Color& ConvertColor(float *col)
+{
+	return sf::Color((int)(col[0] * 255),
+					(int)(col[1] * 255),
+					(int)(col[2] * 255));
+}
+
 int main()
 {
 	sf::RenderWindow window({ 1280, 700 }, "ImStyle");
 	ImGui::SFML::Init(window);
 	ImStyle::LoadStyleFromINI("style.ini");
+	float clearColor[3] = { 1, 1, 1 };
 	sf::Event e;
 	while (window.isOpen())
 	{
@@ -25,10 +33,16 @@ int main()
 			}
 		}
 
-		window.clear(sf::Color::White);
+		window.clear(ConvertColor(clearColor));
 		ImGui::SFML::NewFrame();
 		ShowTestWindow();
 		ShowStyleEditor();
+
+		ImGui::SetNextWindowSize(ImVec2(370, 53), ImGuiSetCond_Always);
+		ImGui::Begin("Color editor", NULL, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
+		ImGui::ColorEdit3("Background color", clearColor);
+		ImGui::End();
+		
 		ImGui::Render();
 		window.display();
 	}
