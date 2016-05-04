@@ -1,0 +1,8 @@
+.vs
+bin
+libs
+*.sdf
+*.vcx*
+*.sln
+
+premake5.lua
