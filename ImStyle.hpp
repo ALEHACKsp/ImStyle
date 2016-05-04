@@ -65,6 +65,8 @@ namespace ImStyle
 				}
 			}
 		}
+
+        return true;
 	}
 
 	bool SaveStyleToINI(std::string path)
