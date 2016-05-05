@@ -42,7 +42,6 @@ namespace ImStyle
 					else if (p.key == "AAShapes") style.AntiAliasedShapes = p.ToBool();
 					else if (p.key == "CurveTessellationTol") style.CurveTessellationTol = p.ToFloat();
 					else if (p.key == "Alpha") style.Alpha = p.ToFloat();
-					else if (p.key == "WinAlpha") style.WindowFillAlphaDefault = p.ToFloat();
 
 					// Sizes
 					else if (p.key == "WindowPadding_x") style.WindowPadding.x = p.ToFloat();
@@ -81,7 +80,6 @@ namespace ImStyle
 		ADDPROP(AAShapes, style.AntiAliasedShapes);
 		ADDPROP(CurveTessellationTol, style.CurveTessellationTol);
 		ADDPROP(Alpha, style.Alpha);
-		ADDPROP(WinAlpha, style.WindowFillAlphaDefault);
 
 		// Sizes
 		ini.AddSection("Sizes");
