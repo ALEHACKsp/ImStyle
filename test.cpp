@@ -77,7 +77,6 @@ void ShowTestWindow()
 	static bool no_move = false;
 	static bool no_scrollbar = false;
 	static bool no_collapse = false;
-	static bool no_menu = false;
 	static float bg_alpha = -0.01f; // <0: default
 
 									// Demonstrate the various window flags. Typically you would just use the default.
@@ -88,7 +87,6 @@ void ShowTestWindow()
 	if (no_move)      window_flags |= ImGuiWindowFlags_NoMove;
 	if (no_scrollbar) window_flags |= ImGuiWindowFlags_NoScrollbar;
 	if (no_collapse)  window_flags |= ImGuiWindowFlags_NoCollapse;
-	if (!no_menu)     window_flags |= ImGuiWindowFlags_MenuBar;
 	if (!ImGui::Begin("ImGui Demo", p_opened, ImVec2(550, 680), bg_alpha, window_flags))
 	{
 		// Early out if the window is collapsed, as an optimization.
@@ -100,24 +98,6 @@ void ShowTestWindow()
 	ImGui::PushItemWidth(-140);                                 // Right align, keep 140 pixels for labels
 
 	ImGui::Text("Dear ImGui says hello.");
-
-	// Menu
-	if (ImGui::BeginMenuBar())
-	{
-		if (ImGui::BeginMenu("Menu"))
-		{
-			ImGui::EndMenu();
-		}
-		if (ImGui::BeginMenu("Examples"))
-		{
-			ImGui::EndMenu();
-		}
-		if (ImGui::BeginMenu("Help"))
-		{
-			ImGui::EndMenu();
-		}
-		ImGui::EndMenuBar();
-	}
 
 	ImGui::Spacing();
 	if (ImGui::CollapsingHeader("Help"))
@@ -133,7 +113,6 @@ void ShowTestWindow()
 		ImGui::Checkbox("No move", &no_move); ImGui::SameLine(150);
 		ImGui::Checkbox("No scrollbar", &no_scrollbar); ImGui::SameLine(300);
 		ImGui::Checkbox("No collapse", &no_collapse);
-		ImGui::Checkbox("No menu", &no_menu);
 
 		ImGui::PushItemWidth(100);
 		ImGui::DragFloat("Window Fill Alpha", &bg_alpha, 0.005f, -0.01f, 1.0f, bg_alpha < 0.0f ? "(default)" : "%.3f"); // Not exposing zero here so user doesn't "lose" the UI (zero alpha clips all widgets). But application code could have a toggle to switch between zero and non-zero.
@@ -1484,7 +1463,6 @@ void ShowStyleEditor()
 		ImGui::DragFloat("Curve Tessellation Tolerance", &style.CurveTessellationTol, 0.02f, 0.10f, FLT_MAX, NULL, 2.0f);
 		if (style.CurveTessellationTol < 0.0f) style.CurveTessellationTol = 0.10f;
 		ImGui::DragFloat("Global Alpha", &style.Alpha, 0.005f, 0.20f, 1.0f, "%.2f"); // Not exposing zero here so user doesn't "lose" the UI (zero alpha clips all widgets). But application code could have a toggle to switch between zero and non-zero.
-		ImGui::DragFloat("Window Fill Alpha Default", &style.WindowFillAlphaDefault, 0.005f, 0.0f, 1.0f, "%.2f");
 		ImGui::PopItemWidth();
 		ImGui::TreePop();
 	}
